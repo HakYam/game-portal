@@ -8,10 +8,16 @@ import {
   Center,
   Button,
 } from "@chakra-ui/react";
-import useGenres from "../hooks/useGenres";
+import useGenres, { Genre } from "../hooks/useGenres";
 import getCroppedImageUrl from "../services/image-url";
 
-const GenreList = () => {
+
+interface Props {
+  onSelectGenre: (genre: Genre) => void;
+  selectedGenre: Genre | null;
+}
+
+const GenreList = ( { selectedGenre, onSelectGenre}: Props ) => {
   const { data, isLoading, error } = useGenres();
 
   if (isLoading) {
@@ -34,7 +40,12 @@ const GenreList = () => {
               borderRadius={8}
               src={getCroppedImageUrl(genre.image_background)}
             />
-            <Button onClick={() => console.log(genre)} fontSize={"sl"} overflow={'hidden'}>
+            <Button
+              onClick={() => onSelectGenre(genre)}
+              fontSize={"sl"}
+              overflow={"hidden"}
+              fontWeight={genre.id === selectedGenre?.id ? "bold" : "normal"}
+            >
               {genre.name}
             </Button>
           </HStack>
