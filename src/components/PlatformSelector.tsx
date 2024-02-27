@@ -14,7 +14,7 @@ export const PlatformSelector = ( {onSelectPlatform, selectedPlatform} : Props )
     
   return (
     <Menu>
-      <MenuButton marginX={'10px'} as={Button} rightIcon={<BsChevronDown />}>{selectedPlatform?.name || 'Platform'}</MenuButton>
+      <MenuButton  as={Button} rightIcon={<BsChevronDown />}>{selectedPlatform?.name || 'Platform'}</MenuButton>
       <MenuList>
         {data.map(platform => 
           <MenuItem onClick={ () => {
